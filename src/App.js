@@ -1,23 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import UserContext from "./UserContext";
+import ThemeContext from "./ThemeContext";
+import { useState } from "react";
+import Navbar from "./Components/Navbar";
+import Dashboard from "./Components/Dashboard";
+import ThemeButton from "./Components/ThemeButton";
 
 function App() {
+  const user = {
+    name: "Abhi",
+    email: "email@gmail.com",
+    contact_no: "7071310320",
+  };
+
+  const [theme, setTheme] = useState("light");
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <UserContext.Provider value={user}>
+        <Navbar />
+        <Dashboard />
+      </UserContext.Provider>
+
+      <ThemeContext.Provider value={{ theme, setTheme }}>
+        <ThemeButton />
+      </ThemeContext.Provider>
     </div>
   );
 }
